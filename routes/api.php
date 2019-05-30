@@ -16,3 +16,13 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['prefix' => 'refrigerantes'], function () {
+    Route::get('/', 'Refrigerantes\RefrigerantesController@getAllRefrigerantess');
+    Route::get('/{id}', 'Refrigerantes\RefrigerantesController@getRefrigerantesById');
+    Route::post('/paginate/{totalPage?}', 'Refrigerantes\RefrigerantesController@getAllRefrigerantessPaginate');
+    Route::post('/', 'Refrigerantes\RefrigerantesController@createRefrigerantes');
+    Route::patch('/{id}', 'Refrigerantes\RefrigerantesController@updateRefrigerantes');
+    Route::patch('/{id}/enable', 'Refrigerantes\RefrigerantesController@enableRefrigerantes');
+    Route::patch('/{id}/disable', 'Refrigerantes\RefrigerantesController@disableRefrigerantes');
+});
