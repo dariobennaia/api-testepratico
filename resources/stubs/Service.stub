@@ -1,0 +1,89 @@
+<?php
+
+namespace App\Services{{nameSpaceClass}};
+
+use App\Repositories\{{nameSpaceUseClass}}{{className}}Repository;
+
+class {{className}}Service
+{
+    /**
+     * @var ${{attributeNameRepository}}Repository
+     */
+    private ${{attributeNameRepository}}Repository;
+
+    /**
+     * {{className}}Repository constructor.
+     * @param {{className}}Repository ${{attributeNameRepository}}Repository
+     */
+    public function __construct({{className}}Repository ${{attributeNameRepository}}Repository)
+    {
+        $this->{{attributeNameRepository}}Repository = ${{attributeNameRepository}}Repository;
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model[]
+     */
+    public function getAll{{className}}s()
+    {
+        return $this->{{attributeNameRepository}}Repository->getModel()->all();
+    }
+
+    /**
+     * @param string $search
+     * @param int $totalPages
+     * @return mixed
+     */
+    public function getAll{{className}}sPaginate(string $search, int $totalPages = 10)
+    {
+        return $this->{{attributeNameRepository}}Repository->search{{className}}s($search)->paginate($totalPages);
+    }
+
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function get{{className}}ById(int $id)
+    {
+        return $this->{{attributeNameRepository}}Repository->get{{className}}ById($id);
+    }
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    public function create{{className}}(array $data)
+    {
+        return $this->{{attributeNameRepository}}Repository->create{{className}}($data);
+    }
+
+    /**
+     * @param int $id
+     * @param array $data
+     * @return mixed
+     */
+    public function update{{className}}($id, array $data)
+    {
+        $this->{{attributeNameRepository}}Repository->update{{className}}ById($id, $data);
+        return $this->{{attributeNameRepository}}Repository->get{{className}}ById($id);
+    }
+
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function enable{{className}}(int $id)
+    {
+        $this->{{attributeNameRepository}}Repository->update{{className}}ById($id, ['flg_active' => true]);
+        return $this->{{attributeNameRepository}}Repository->get{{className}}ById($id);
+    }
+
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function disable{{className}}(int $id)
+    {
+        $this->{{attributeNameRepository}}Repository->update{{className}}ById($id, ['flg_active' => false]);
+        return $this->{{attributeNameRepository}}Repository->get{{className}}ById($id);
+    }
+}

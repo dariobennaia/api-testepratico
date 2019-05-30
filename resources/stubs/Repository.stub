@@ -1,0 +1,64 @@
+<?php
+
+namespace App\Repositories{{nameSpaceClass}};
+
+use App\Repositories\Repository;
+use App\{{className}};
+
+class {{className}}Repository extends Repository
+{
+    /**
+     * {{className}}Repository constructor.
+     * @param {{className}} $model
+     */
+    public function __construct({{className}} $model)
+    {
+        parent::__construct($model);
+    }
+
+    /**
+     * @param string $search
+     * @return mixed
+     */
+    public function search{{className}}s(string $search)
+    {
+        $fill = $this->getFillableModel();
+
+        $model = $this->getModel()->where('id', '=', "%{$search}%");
+        unset($fill['id']);
+
+        foreach ($fill as $value) {
+            $model->orWhere($value, 'like', "%{$search}%");
+        }
+
+        return $model;
+    }
+
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function get{{className}}ById(int $id)
+    {
+        return $this->getModel()->find($id);
+    }
+
+     /**
+     * @param array $data
+     * @return mixed
+     */
+    public function create{{className}}(array $data)
+    {
+        return $this->getModel()->create($data);
+    }
+
+    /**
+     * @param $id
+     * @param array $data
+     * @return mixed
+     */
+    public function update{{className}}ById($id, array $data)
+    {
+        return $this->getModel()->where('id', $id)->update($data);
+    }
+}

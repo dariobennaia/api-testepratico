@@ -1,0 +1,51 @@
+<?php
+
+namespace App\Rules{{nameSpaceClass}};
+
+use Illuminate\Contracts\Validation\Rule;
+use App\{{className}};
+
+class CheckIf{{className}}ExistsRule implements Rule
+{
+    private ${{attributeName}}Id;
+
+    /**
+     * Create a new rule instance.
+     *
+     * @return void
+     */
+    public function __construct(${{attributeName}}Id)
+    {
+        $this->{{attributeName}}Id = ${{attributeName}}Id;
+    }
+
+    /**
+     * Determine if the validation rule passes.
+     *
+     * @param  string  $attribute
+     * @param  mixed  $value
+     * @return bool
+     */
+    public function passes($attribute, $value)
+    {
+        try {
+            $total{{className}} = {{className}}::where('id', $this->{{attributeName}}Id)->count();
+            if ($total{{className}} === 0) {
+                return false;
+            }
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    /**
+     * Get the validation error message.
+     *
+     * @return string
+     */
+    public function message()
+    {
+        return 'Registro inexistente!';
+    }
+}
