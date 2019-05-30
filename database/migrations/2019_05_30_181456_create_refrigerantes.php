@@ -15,12 +15,12 @@ class CreateRefrigerantes extends Migration
     {
         Schema::create('refrigerantes', function (Blueprint $table) {
             $table->increments('id_refrigerante');
-            $table->string('id_tipo_refrigerante');
-            $table->string('id_litragem_refrigerante');
-            $table->string('sabor');
-            $table->string('marca');
-            $table->string('valor');
-            $table->string('estoque');
+            $table->integer('id_tipo_refrigerante')->unsigned();
+            $table->integer('id_litragem_refrigerante')->unsigned();
+            $table->string('sabor', 30);
+            $table->string('marca', 30);
+            $table->decimal('valor', 10,2);
+            $table->integer('estoque')->unsigned();
             $table->timestamps();
         });
     }
