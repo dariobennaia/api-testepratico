@@ -19,7 +19,7 @@ class CreateRefrigerantes extends Migration
             $table->integer('id_litragem_refrigerante')->unsigned();
             $table->string('sabor', 30);
             $table->string('marca', 30);
-            $table->decimal('valor', 10,2);
+            $table->decimal('valor', 10, 2);
             $table->integer('estoque')->unsigned();
             $table->timestamps();
         });
