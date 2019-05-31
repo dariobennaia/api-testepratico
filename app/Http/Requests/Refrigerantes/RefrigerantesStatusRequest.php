@@ -23,8 +23,9 @@ class RefrigerantesStatusRequest extends FormRequest
      */
     public function rules()
     {
+        $idRefigerante = $this->id_refrigerante;
         return [
-            'id' => [new \App\Rules\Refrigerantes\CheckIfRefrigerantesExistsRule($this->id)]
+            'id_refrigerante' => [new \App\Rules\Refrigerantes\CheckIfRefrigerantesExistsRule($idRefigerante)]
         ];
     }
 
@@ -45,7 +46,7 @@ class RefrigerantesStatusRequest extends FormRequest
     public function all($keys = null)
     {
         $data = parent::all();
-        $data['id'] = $this->route('id');
+        $data['id_refrigerante'] = $this->route('id_refrigerante');
         return $data;
     }
 }

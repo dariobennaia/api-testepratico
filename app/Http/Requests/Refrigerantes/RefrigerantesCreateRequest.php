@@ -23,11 +23,18 @@ class RefrigerantesCreateRequest extends FormRequest
      */
     public function rules()
     {
+        $marca = $this->marca;
+        $idLitragemRefrigerante = $this->id_litragem_refrigerante;
+        $idTipoRefrigerante = $this->id_tipo_refrigerante;
+
         return [
-            'id_refrigerante' => 'required',
             'id_tipo_refrigerante' => 'required',
             'id_litragem_refrigerante' => 'required',
-            'sabor' => 'required',
+            'sabor' => [
+                'required',
+                "unique:refrigerantes,sabor,null,id_refrigerante,marca,{$marca},id_litragem_refrigerante,
+                {$idLitragemRefrigerante},id_tipo_refrigerante,{$idTipoRefrigerante}"
+            ],
             'marca' => 'required',
             'valor' => 'required',
             'estoque' => 'required'
@@ -40,24 +47,15 @@ class RefrigerantesCreateRequest extends FormRequest
     public function messages()
     {
         return [
-            'id_refrigerante.required' => 'Este campo é obrigatorio',
-            'id_tipo_refrigerante.required' => 'Este campo é obrigatorio',
-            'id_litragem_refrigerante.required' => 'Este campo é obrigatorio',
-            'sabor.required' => 'Este campo é obrigatorio',
-            'marca.required' => 'Este campo é obrigatorio',
-            'valor.required' => 'Este campo é obrigatorio',
-            'estoque.required' => 'Este campo é obrigatório!'
-        ];
-    }
+            'id_tipo_refrigerante.required' => 'Informe o tipo do refrigerante!',
+            'id_litragem_refrigerante.required' => 'Informe a litragem do refrigerante!',
 
-    /**
-     * @param null $keys
-     * @return array
-     */
-    public function all($keys = null)
-    {
-        $data = parent::all();
-        $data['id'] = $this->route('id');
-        return $data;
+            'sabor.required' => 'Informe o sabor do refrigerante!',
+            'sabor.unique' => 'Ops! parece que este refrigerante já esta cadastrado!',
+
+            'marca.required' => 'Informe a marca do refrigerante!',
+            'valor.required' => 'Informe o valor unitário do refrigerante!',
+            'estoque.required' => 'Informe a quantidade em estoque do refrigerante!!'
+        ];
     }
 }
