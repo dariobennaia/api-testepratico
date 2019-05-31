@@ -7,7 +7,6 @@ use App\Services\Refrigerantes\RefrigerantesService;
 use Illuminate\Http\Request;
 use App\Http\Requests\Refrigerantes\RefrigerantesCreateRequest;
 use App\Http\Requests\Refrigerantes\RefrigerantesUpdateRequest;
-use App\Http\Requests\Refrigerantes\RefrigerantesDeleteRequest;
 
 class RefrigerantesController extends Controller
 {
