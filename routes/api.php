@@ -23,6 +23,6 @@ Route::group(['prefix' => 'refrigerantes'], function () {
     Route::post('/paginate/{total_page?}', 'Refrigerantes\RefrigerantesController@getAllRefrigerantessPaginate');
     Route::post('/', 'Refrigerantes\RefrigerantesController@createRefrigerantes');
     Route::patch('/{id_refrigerante}', 'Refrigerantes\RefrigerantesController@updateRefrigerantes');
-    Route::patch('/{id_refrigerante}/enable', 'Refrigerantes\RefrigerantesController@enableRefrigerantes');
-    Route::patch('/{id_refrigerante}/disable', 'Refrigerantes\RefrigerantesController@disableRefrigerantes');
+    Route::delete('/', 'Refrigerantes\RefrigerantesController@deleteRefrigerantes');
+    Route::delete('/{id_refrigerante}', 'Refrigerantes\RefrigerantesController@deleteRefrigerante');
 });
