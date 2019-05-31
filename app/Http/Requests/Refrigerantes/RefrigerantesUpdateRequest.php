@@ -35,7 +35,7 @@ class RefrigerantesUpdateRequest extends FormRequest
             'sabor' => [
                 'required',
                 "unique:refrigerantes,sabor,{$idRefigerante},id_refrigerante,marca,{$marca},id_litragem_refrigerante,
-                {$idLitragemRefrigerante},id_tipo_refrigerante,{$idTipoRefrigerante}"
+                {$idLitragemRefrigerante},id_tipo_refrigerante,{$idTipoRefrigerante},deleted_at,NULL"
             ],
             'marca' => 'required',
             'valor' => 'required',
