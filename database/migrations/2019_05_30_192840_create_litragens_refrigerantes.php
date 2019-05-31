@@ -15,7 +15,7 @@ class CreateLitragensRefrigerantes extends Migration
     {
         Schema::create('litragens_refrigerantes', function (Blueprint $table) {
             $table->increments('id_litragem_refrigerante');
-            $table->string('litragem_refrigerante', 20);
+            $table->string('litragem_refrigerante', 20)->unique();
             $table->boolean('flg_ativo')->default(true);
             $table->timestamps();
         });

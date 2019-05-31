@@ -14,7 +14,7 @@ class CreateTiposRefrigerantes extends Migration
     public function up()
     {
         Schema::create('tipos_refrigerantes', function (Blueprint $table) {
-            $table->increments('id_tipo_refrigerante');
+            $table->increments('id_tipo_refrigerante')->unique();
             $table->string('tipo_refrigerante', 20);
             $table->boolean('flg_ativo')->default(true);
             $table->timestamps();
