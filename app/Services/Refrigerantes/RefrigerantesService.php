@@ -68,22 +68,17 @@ class RefrigerantesService
     }
 
     /**
-     * @param int $id
+     * @param $id
      * @return mixed
      */
-    public function enableRefrigerantes(int $id)
+    public function deleteRefrigerante($id)
     {
-        $this->refrigerantesRepository->updateRefrigerantesById($id, ['flg_active' => true]);
-        return $this->refrigerantesRepository->getRefrigerantesById($id);
-    }
+        if (is_array($id)) {
+            $this->refrigerantesRepository->deleteByIds($id);
+            return $this->refrigerantesRepository->getRefrigerantesTrashedByIds($id);
+        }
 
-    /**
-     * @param int $id
-     * @return mixed
-     */
-    public function disableRefrigerantes(int $id)
-    {
-        $this->refrigerantesRepository->updateRefrigerantesById($id, ['flg_active' => false]);
-        return $this->refrigerantesRepository->getRefrigerantesById($id);
+        $this->refrigerantesRepository->delete($id);
+        return $this->refrigerantesRepository->getRefrigerantesTrashedById($id);
     }
 }
