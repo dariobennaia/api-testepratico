@@ -43,6 +43,24 @@ class RefrigerantesRepository extends Repository
         return $this->getModel()->find($id);
     }
 
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function getRefrigerantesTrashedById(int $id)
+    {
+        return $this->getModel()->onlyTrashed()->find($id);
+    }
+
+    /**
+     * @param array $ids
+     * @return mixed
+     */
+    public function getRefrigerantesTrashedByIds(array $ids)
+    {
+        return $this->getModel()->onlyTrashed()->whereIn('id_refrigerante', $ids)->get();
+    }
+
      /**
      * @param array $data
      * @return mixed
@@ -59,6 +77,15 @@ class RefrigerantesRepository extends Repository
      */
     public function updateRefrigerantesById($id, array $data)
     {
-        return $this->getModel()->where('id', $id)->update($data);
+        return $this->getModel()->where('id_refrigerante', $id)->update($data);
+    }
+
+    /**
+     * @param array $ids
+     * @return mixed
+     */
+    public function deleteByIds(array $ids)
+    {
+        return $this->getModel()->whereIn('id_refrigerante', $ids)->delete();
     }
 }

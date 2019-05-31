@@ -7,7 +7,7 @@ use App\Services\Refrigerantes\RefrigerantesService;
 use Illuminate\Http\Request;
 use App\Http\Requests\Refrigerantes\RefrigerantesCreateRequest;
 use App\Http\Requests\Refrigerantes\RefrigerantesUpdateRequest;
-use App\Http\Requests\Refrigerantes\RefrigerantesStatusRequest;
+use App\Http\Requests\Refrigerantes\RefrigerantesDeleteRequest;
 
 class RefrigerantesController extends Controller
 {
@@ -72,20 +72,20 @@ class RefrigerantesController extends Controller
     }
 
     /**
-     * @param RefrigerantesStatusRequest $request
+     * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function enableRefrigerantes(RefrigerantesStatusRequest $request)
+    public function deleteRefrigerante(int $id)
     {
-        return $this->returnResponseData($this->refrigerantesService->enableRefrigerantes($request->id));
+        return $this->returnResponseData($this->refrigerantesService->deleteRefrigerante($id));
     }
 
     /**
-     * @param RefrigerantesStatusRequest $request
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function disableRefrigerantes(RefrigerantesStatusRequest $request)
+    public function deleteRefrigerantes(Request $request)
     {
-        return $this->returnResponseData($this->refrigerantesService->disableRefrigerantes($request->id));
+        return $this->returnResponseData($this->refrigerantesService->deleteRefrigerante($request->id_refrigerante));
     }
 }
