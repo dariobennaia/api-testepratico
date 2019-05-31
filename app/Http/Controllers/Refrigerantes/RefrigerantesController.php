@@ -40,7 +40,9 @@ class RefrigerantesController extends Controller
      */
     public function getAllRefrigerantessPaginate(Request $request, int $totalPage = 10)
     {
-        return $this->returnResponseData($this->refrigerantesService->getAllRefrigerantessPaginate($request->search, $totalPage));
+        return $this->returnResponseData(
+            $this->refrigerantesService->getAllRefrigerantessPaginate($request->search, $totalPage)
+        );
     }
 
     /**
