@@ -29,7 +29,7 @@ class CheckIfRefrigerantesExistsRule implements Rule
     public function passes($attribute, $value)
     {
         try {
-            $totalRefrigerantes = Refrigerantes::where('id', $this->refrigerantesId)->count();
+            $totalRefrigerantes = Refrigerantes::where('id_refrigerante', $this->refrigerantesId)->count();
             if ($totalRefrigerantes === 0) {
                 return false;
             }
