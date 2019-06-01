@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Refrigerantes;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Refrigerantes\MultiplesRefrigerantesDeleteRequest;
+use App\Http\Requests\Refrigerantes\RefrigerantesDeleteRequest;
 use App\Services\Refrigerantes\RefrigerantesService;
 use Illuminate\Http\Request;
 use App\Http\Requests\Refrigerantes\RefrigerantesCreateRequest;
@@ -40,7 +42,7 @@ class RefrigerantesController extends Controller
     public function getAllRefrigerantessPaginate(Request $request, int $totalPage = 10)
     {
         return $this->returnResponseData(
-            $this->refrigerantesService->getAllRefrigerantessPaginate($request->search, $totalPage)
+            $this->refrigerantesService->getAllRefrigerantessPaginate($request->toArray(), $totalPage)
         );
     }
 
@@ -73,19 +75,19 @@ class RefrigerantesController extends Controller
     }
 
     /**
-     * @param $id
+     * @param RefrigerantesDeleteRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function deleteRefrigerante(int $id)
+    public function deleteRefrigerante(RefrigerantesDeleteRequest $request)
     {
-        return $this->returnResponseData($this->refrigerantesService->deleteRefrigerante($id));
+        return $this->returnResponseData($this->refrigerantesService->deleteRefrigerante($request->id_refrigerante));
     }
 
     /**
-     * @param Request $request
+     * @param MultiplesRefrigerantesDeleteRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function deleteRefrigerantes(Request $request)
+    public function deleteRefrigerantes(MultiplesRefrigerantesDeleteRequest $request)
     {
         return $this->returnResponseData($this->refrigerantesService->deleteRefrigerante($request->id_refrigerante));
     }
