@@ -17,21 +17,24 @@ class RefrigerantesRepository extends Repository
     }
 
     /**
-     * @param string $search
+     * @param array $search
      * @return mixed
      */
-    public function searchRefrigerantess(string $search)
+    public function searchRefrigerantes(array $search = [])
     {
         $fill = $this->getFillableModel();
+        unset($fill['id_refrigerante']);
 
-        $model = $this->getModel()->where('id', '=', "%{$search}%");
-        unset($fill['id']);
+        $model = $this->getModel();
 
-        foreach ($fill as $value) {
-            $model->orWhere($value, 'like', "%{$search}%");
+        foreach ($search as $i => $value) {
+            if (!in_array($i, $fill)) {
+                continue;
+            }
+            $model = $model->where($i, $value);
         }
 
-        return $model;
+        return $model->with(['tipoRefrigerante', 'litragemRefrigerante']);
     }
 
     /**
@@ -40,7 +43,7 @@ class RefrigerantesRepository extends Repository
      */
     public function getRefrigerantesById(int $id)
     {
-        return $this->getModel()->find($id);
+        return $this->getModel()->with(['tipoRefrigerante', 'litragemRefrigerante'])->find($id);
     }
 
     /**
@@ -49,7 +52,7 @@ class RefrigerantesRepository extends Repository
      */
     public function getRefrigerantesTrashedById(int $id)
     {
-        return $this->getModel()->onlyTrashed()->find($id);
+        return $this->getModel()->onlyTrashed()->with(['tipoRefrigerante', 'litragemRefrigerante'])->find($id);
     }
 
     /**
@@ -58,7 +61,8 @@ class RefrigerantesRepository extends Repository
      */
     public function getRefrigerantesTrashedByIds(array $ids)
     {
-        return $this->getModel()->onlyTrashed()->whereIn('id_refrigerante', $ids)->get();
+        return $this->getModel()->onlyTrashed()->whereIn('id_refrigerante', $ids)
+            ->with(['tipoRefrigerante', 'litragemRefrigerante'])->get();
     }
 
      /**
