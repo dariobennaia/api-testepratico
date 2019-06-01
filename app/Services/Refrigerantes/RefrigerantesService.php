@@ -29,13 +29,13 @@ class RefrigerantesService
     }
 
     /**
-     * @param string $search
+     * @param array $search
      * @param int $totalPages
      * @return mixed
      */
-    public function getAllRefrigerantessPaginate(string $search, int $totalPages = 10)
+    public function getAllRefrigerantessPaginate(array $search = [], int $totalPages = 10)
     {
-        return $this->refrigerantesRepository->searchRefrigerantess($search)->paginate($totalPages);
+        return $this->refrigerantesRepository->searchRefrigerantes($search)->paginate($totalPages);
     }
 
     /**
