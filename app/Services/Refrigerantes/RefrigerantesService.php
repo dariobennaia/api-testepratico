@@ -25,7 +25,7 @@ class RefrigerantesService
      */
     public function getAllRefrigerantess()
     {
-        return $this->refrigerantesRepository->getModel()->all();
+        return $this->refrigerantesRepository->obterTodosOsRefrigerantes();
     }
 
     /**
@@ -78,7 +78,7 @@ class RefrigerantesService
             return $this->refrigerantesRepository->getRefrigerantesTrashedByIds($id);
         }
 
-        $this->refrigerantesRepository->delete($id);
+        $this->refrigerantesRepository->deleteById($id);
         return $this->refrigerantesRepository->getRefrigerantesTrashedById($id);
     }
 }
