@@ -92,4 +92,21 @@ class RefrigerantesRepository extends Repository
     {
         return $this->getModel()->whereIn('id_refrigerante', $ids)->delete();
     }
+
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function deleteById(int $id)
+    {
+        return $this->getModel()->where('id_refrigerante', $id)->delete();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model[]
+     */
+    public function obterTodosOsRefrigerantes()
+    {
+        return $this->getModel()->all();
+    }
 }
