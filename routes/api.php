@@ -19,8 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'refrigerantes'], function () {
     Route::get('/', 'Refrigerantes\RefrigerantesController@getAllRefrigerantess');
+    Route::get('/paginacao/{total_page?}', 'Refrigerantes\RefrigerantesController@getAllRefrigerantessPaginate');
     Route::get('/{id_refrigerante}', 'Refrigerantes\RefrigerantesController@getRefrigerantesById');
-    Route::post('/paginate/{total_page?}', 'Refrigerantes\RefrigerantesController@getAllRefrigerantessPaginate');
     Route::post('/', 'Refrigerantes\RefrigerantesController@createRefrigerantes');
     Route::patch('/{id_refrigerante}', 'Refrigerantes\RefrigerantesController@updateRefrigerantes');
     Route::delete('/', 'Refrigerantes\RefrigerantesController@deleteRefrigerantes');
