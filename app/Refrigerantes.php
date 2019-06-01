@@ -19,4 +19,20 @@ class Refrigerantes extends Model
         'valor',
         'estoque'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function tipoRefrigerante()
+    {
+        return $this->hasOne('App\TiposRefrigerantes', 'id_tipo_refrigerante');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function litragemRefrigerante()
+    {
+        return $this->hasOne('App\LitragensRefrigerantes', 'id_litragem_refrigerante');
+    }
 }
