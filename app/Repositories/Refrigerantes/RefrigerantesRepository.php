@@ -17,17 +17,17 @@ class RefrigerantesRepository extends Repository
     }
 
     /**
-     * @param array $search
-     * @return mixed
+     * @param array $busca
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
      */
-    public function searchRefrigerantes(array $search = [])
+    public function buscarRefrigerantes(array $busca = [])
     {
         $fill = $this->getFillableModel();
         unset($fill['id_refrigerante']);
 
         $model = $this->getModel();
 
-        foreach ($search as $i => $value) {
+        foreach ($busca as $i => $value) {
             if (!in_array($i, $fill)) {
                 continue;
             }
@@ -41,7 +41,7 @@ class RefrigerantesRepository extends Repository
      * @param int $id
      * @return mixed
      */
-    public function getRefrigerantesById(int $id)
+    public function obterRefrigerantePorId(int $id)
     {
         return $this->getModel()->with(['tipoRefrigerante', 'litragemRefrigerante'])->find($id);
     }
@@ -69,7 +69,7 @@ class RefrigerantesRepository extends Repository
      * @param array $data
      * @return mixed
      */
-    public function createRefrigerantes(array $data)
+    public function cadastrarRefrigerante(array $data)
     {
         return $this->getModel()->create($data);
     }
@@ -79,7 +79,7 @@ class RefrigerantesRepository extends Repository
      * @param array $data
      * @return mixed
      */
-    public function updateRefrigerantesById($id, array $data)
+    public function atualizarRefrigerantePorId($id, array $data)
     {
         return $this->getModel()->where('id_refrigerante', $id)->update($data);
     }
@@ -88,7 +88,7 @@ class RefrigerantesRepository extends Repository
      * @param array $ids
      * @return mixed
      */
-    public function deleteByIds(array $ids)
+    public function excluirPorIds(array $ids)
     {
         return $this->getModel()->whereIn('id_refrigerante', $ids)->delete();
     }
@@ -97,7 +97,7 @@ class RefrigerantesRepository extends Repository
      * @param int $id
      * @return mixed
      */
-    public function deleteById(int $id)
+    public function excluirPorId(int $id)
     {
         return $this->getModel()->where('id_refrigerante', $id)->delete();
     }

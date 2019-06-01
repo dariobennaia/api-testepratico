@@ -4,7 +4,7 @@ namespace App\Http\Requests\Refrigerantes;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RefrigerantesDeleteRequest extends FormRequest
+class RefrigerantesDelecoesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

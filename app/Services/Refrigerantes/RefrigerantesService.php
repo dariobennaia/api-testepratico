@@ -23,37 +23,37 @@ class RefrigerantesService
     /**
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model[]
      */
-    public function getAllRefrigerantess()
+    public function obterTodosOsRefrigerantes()
     {
         return $this->refrigerantesRepository->obterTodosOsRefrigerantes();
     }
 
     /**
-     * @param array $search
+     * @param array $busca
      * @param int $totalPages
      * @return mixed
      */
-    public function getAllRefrigerantessPaginate(array $search = [], int $totalPages = 10)
+    public function obterTodosOsRefrigerantesEmPaginacao(array $busca = [], int $totalPaginas = 10)
     {
-        return $this->refrigerantesRepository->searchRefrigerantes($search)->paginate($totalPages);
+        return $this->refrigerantesRepository->buscarRefrigerantes($busca)->paginate($totalPaginas);
     }
 
     /**
      * @param int $id
      * @return mixed
      */
-    public function getRefrigerantesById(int $id)
+    public function obterRefrigerantePorId(int $id)
     {
-        return $this->refrigerantesRepository->getRefrigerantesById($id);
+        return $this->refrigerantesRepository->obterRefrigerantePorId($id);
     }
 
     /**
      * @param array $data
      * @return mixed
      */
-    public function createRefrigerantes(array $data)
+    public function cadastrarRefrigerante(array $data)
     {
-        return $this->refrigerantesRepository->createRefrigerantes($data);
+        return $this->refrigerantesRepository->cadastrarRefrigerante($data);
     }
 
     /**
@@ -61,24 +61,24 @@ class RefrigerantesService
      * @param array $data
      * @return mixed
      */
-    public function updateRefrigerantes($id, array $data)
+    public function atualizarRefrigerante($id, array $data)
     {
-        $this->refrigerantesRepository->updateRefrigerantesById($id, $data);
-        return $this->refrigerantesRepository->getRefrigerantesById($id);
+        $this->refrigerantesRepository->atualizarRefrigerantePorId($id, $data);
+        return $this->refrigerantesRepository->obterRefrigerantePorId($id);
     }
 
     /**
      * @param $id
      * @return mixed
      */
-    public function deleteRefrigerante($id)
+    public function excluirRefrigerante($id)
     {
         if (is_array($id)) {
-            $this->refrigerantesRepository->deleteByIds($id);
+            $this->refrigerantesRepository->excluirPorIds($id);
             return $this->refrigerantesRepository->getRefrigerantesTrashedByIds($id);
         }
 
-        $this->refrigerantesRepository->deleteById($id);
+        $this->refrigerantesRepository->excluirPorId($id);
         return $this->refrigerantesRepository->getRefrigerantesTrashedById($id);
     }
 }

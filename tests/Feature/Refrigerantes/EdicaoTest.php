@@ -32,9 +32,9 @@ class EdicaoTest extends TestCase
         return $refrigerante->id_refrigerante;
     }
 
-    public function deleteRefrigerante($id)
+    public function excluirRefrigerante($id)
     {
-        Refrigerantes::find($id)->delete();
+        \DB::table('refrigerantes')->where('id_refrigerante', $id)->delete();
     }
 
     public function testEdicaoDeRefrigeranteComDadosValidos()
@@ -53,7 +53,7 @@ class EdicaoTest extends TestCase
         $this->assertEquals('application/json', $request->headers->get('Content-Type'));
         $this->assertJson($request->getContent());
 
-        $this->deleteRefrigerante($idRefrigerante);
+        $this->excluirRefrigerante($idRefrigerante);
     }
 
     public function testEdicaoDeRefrigeranteComDadosVazios()
@@ -72,7 +72,7 @@ class EdicaoTest extends TestCase
         $this->assertEquals('application/json', $request->headers->get('Content-Type'));
         $this->assertJson($request->getContent());
 
-        $this->deleteRefrigerante($idRefrigerante);
+        $this->excluirRefrigerante($idRefrigerante);
     }
 
     public function testEdicaoDeRefrigeranteComInformacoesDuplicadas()
@@ -96,8 +96,8 @@ class EdicaoTest extends TestCase
         $this->assertEquals('application/json', $request->headers->get('Content-Type'));
         $this->assertJson($request->getContent());
 
-        $this->deleteRefrigerante($idRefrigerante1);
-        $this->deleteRefrigerante($idRefrigerante2);
+        $this->excluirRefrigerante($idRefrigerante1);
+        $this->excluirRefrigerante($idRefrigerante2);
     }
 
     public function testEdicaoDeRefrigeranteComValorUnitarioAlfaNumerico()
@@ -118,7 +118,7 @@ class EdicaoTest extends TestCase
         $this->assertEquals('application/json', $request->headers->get('Content-Type'));
         $this->assertJson($request->getContent());
 
-        $this->deleteRefrigerante($idRefrigerante);
+        $this->excluirRefrigerante($idRefrigerante);
     }
 
     public function testEdicaoDeRefrigeranteComValorUnitarioDecimalInvalido()
@@ -174,7 +174,7 @@ class EdicaoTest extends TestCase
         $this->assertEquals('application/json', $request->headers->get('Content-Type'));
         $this->assertJson($request->getContent());
 
-        $this->deleteRefrigerante($idRefrigerante);
+        $this->excluirRefrigerante($idRefrigerante);
     }
 
     public function testEdicaoDeRefrigeranteComValorDeEstoqueAlfaNumerico()
@@ -194,7 +194,7 @@ class EdicaoTest extends TestCase
         $this->assertEquals('application/json', $request->headers->get('Content-Type'));
         $this->assertJson($request->getContent());
 
-        $this->deleteRefrigerante($idRefrigerante);
+        $this->excluirRefrigerante($idRefrigerante);
     }
 
     public function testEdicaoDeRefrigeranteComValorDeEstoqueInvalido()
@@ -226,6 +226,6 @@ class EdicaoTest extends TestCase
         $this->assertEquals('application/json', $request->headers->get('Content-Type'));
         $this->assertJson($request->getContent());
 
-        $this->deleteRefrigerante($idRefrigerante);
+        $this->excluirRefrigerante($idRefrigerante);
     }
 }

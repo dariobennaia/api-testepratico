@@ -32,9 +32,9 @@ class ExclusaoTest extends TestCase
         return $refrigerante->id_refrigerante;
     }
 
-    public function deleteRefrigerante($id)
+    public function excluirRefrigerante($id)
     {
-        Refrigerantes::find($id)->delete();
+        \DB::table('refrigerantes')->where('id_refrigerante', $id)->delete();
     }
 
     public function testExclusaoDeRefrigeranteExistente()
@@ -52,6 +52,8 @@ class ExclusaoTest extends TestCase
         $this->assertIsObject($request);
         $this->assertEquals('application/json', $request->headers->get('Content-Type'));
         $this->assertJson($request->getContent());
+
+        $this->excluirRefrigerante($idRefrigerante);
     }
 
     public function testExclusaoDeMultiplosRefrigerantesExistentes()
@@ -81,6 +83,10 @@ class ExclusaoTest extends TestCase
         $this->assertIsObject($request);
         $this->assertEquals('application/json', $request->headers->get('Content-Type'));
         $this->assertJson($request->getContent());
+
+        foreach ($idRefrigerante as $id) {
+            $this->excluirRefrigerante($id);
+        }
     }
 
     public function testExclusaoDeMultiplosRefrigerantesSemIds()

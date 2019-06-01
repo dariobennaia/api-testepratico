@@ -4,7 +4,7 @@ namespace App\Http\Requests\Refrigerantes;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RefrigerantesCreateRequest extends FormRequest
+class RefrigerantesAtualizacoesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,16 +23,18 @@ class RefrigerantesCreateRequest extends FormRequest
      */
     public function rules()
     {
+        $idRefigerante = $this->id_refrigerante;
         $marca = $this->marca;
         $idLitragemRefrigerante = $this->id_litragem_refrigerante;
         $idTipoRefrigerante = $this->id_tipo_refrigerante;
 
         return [
+            'id_refrigerante' => [new \App\Rules\Refrigerantes\VerificaSeRefrigeranteExisteRule($idRefigerante)],
             'id_tipo_refrigerante' => 'required',
             'id_litragem_refrigerante' => 'required',
             'sabor' => [
                 'required',
-                "unique:refrigerantes,sabor,NULL,id_refrigerante,marca,{$marca},id_litragem_refrigerante,
+                "unique:refrigerantes,sabor,{$idRefigerante},id_refrigerante,marca,{$marca},id_litragem_refrigerante,
                 {$idLitragemRefrigerante},id_tipo_refrigerante,{$idTipoRefrigerante},deleted_at,NULL"
             ],
             'marca' => 'required',
@@ -70,5 +72,16 @@ class RefrigerantesCreateRequest extends FormRequest
             'estoque.numeric' => 'Quantidade para estoque inválida!',
             'estoque.min' => 'A quantidade minima para o estoque é 0!'
         ];
+    }
+
+    /**
+     * @param null $keys
+     * @return array
+     */
+    public function all($keys = null)
+    {
+        $data = parent::all();
+        $data['id_refrigerante'] = $this->route('id_refrigerante');
+        return $data;
     }
 }

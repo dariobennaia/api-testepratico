@@ -18,11 +18,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => 'refrigerantes'], function () {
-    Route::get('/', 'Refrigerantes\RefrigerantesController@getAllRefrigerantess');
-    Route::get('/paginacao/{total_page?}', 'Refrigerantes\RefrigerantesController@getAllRefrigerantessPaginate');
-    Route::get('/{id_refrigerante}', 'Refrigerantes\RefrigerantesController@getRefrigerantesById');
-    Route::post('/', 'Refrigerantes\RefrigerantesController@createRefrigerantes');
-    Route::patch('/{id_refrigerante}', 'Refrigerantes\RefrigerantesController@updateRefrigerantes');
-    Route::delete('/', 'Refrigerantes\RefrigerantesController@deleteRefrigerantes');
-    Route::delete('/{id_refrigerante}', 'Refrigerantes\RefrigerantesController@deleteRefrigerante');
+    Route::get('/', 'Refrigerantes\RefrigerantesController@obterTodosOsRefrigerantes');
+    Route::get(
+        '/paginacao/{total_paginas?}',
+        'Refrigerantes\RefrigerantesController@obterTodosOsRefrigerantesEmPaginacao'
+    );
+    Route::get('/{id_refrigerante}', 'Refrigerantes\RefrigerantesController@obterRefrigerantePorId');
+    Route::post('/', 'Refrigerantes\RefrigerantesController@cadastrarRefrigerante');
+    Route::patch('/{id_refrigerante}', 'Refrigerantes\RefrigerantesController@atualizarRefrigerante');
+    Route::delete('/', 'Refrigerantes\RefrigerantesController@excluirRefrigerantes');
+    Route::delete('/{id_refrigerante}', 'Refrigerantes\RefrigerantesController@excluirRefrigerante');
 });

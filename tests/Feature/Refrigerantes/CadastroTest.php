@@ -140,9 +140,13 @@ class CadastroTest extends TestCase
 
     public function testExcluirCadastroRefrigerante()
     {
-        Refrigerantes::where('sabor', $this->dadosValidos()['sabor'])
+        \DB::table('refrigerantes')
+            ->where('sabor', $this->dadosValidos()['sabor'])
             ->where('marca', $this->dadosValidos()['marca'])
             ->delete();
+//        Refrigerantes::where('sabor', $this->dadosValidos()['sabor'])
+//            ->where('marca', $this->dadosValidos()['marca'])
+//            ->destroy();
         $this->assertTrue(true);
     }
 }

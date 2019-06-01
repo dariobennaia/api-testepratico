@@ -5,7 +5,7 @@ namespace App\Rules\Refrigerantes;
 use Illuminate\Contracts\Validation\Rule;
 use App\Refrigerantes;
 
-class CheckIfRefrigerantesExistsRule implements Rule
+class VerificaSeRefrigeranteExisteRule implements Rule
 {
     private $refrigerantesId;
 
