@@ -36,8 +36,14 @@ class RefrigerantesCreateRequest extends FormRequest
                 {$idLitragemRefrigerante},id_tipo_refrigerante,{$idTipoRefrigerante},deleted_at,NULL"
             ],
             'marca' => 'required',
-            'valor' => 'required',
-            'estoque' => 'required'
+            'valor' => [
+                'bail',
+                'required',
+                'regex:/^(?=.+)(?:[1-9]\d*|0)?(?:\.\d+)?$/',
+                'numeric',
+                'between:0.01,99999999.99'
+            ],
+            'estoque' => 'required|numeric|min:0'
         ];
     }
 
@@ -54,8 +60,15 @@ class RefrigerantesCreateRequest extends FormRequest
             'sabor.unique' => 'Ops! parece que este refrigerante já esta cadastrado!',
 
             'marca.required' => 'Informe a marca do refrigerante!',
+
             'valor.required' => 'Informe o valor unitário do refrigerante!',
-            'estoque.required' => 'Informe a quantidade em estoque do refrigerante!!'
+            'valor.regex' => 'O valor do refrigerante esta inválido! Tente de R$ 0.00 a 99999999.99!',
+            'valor.numeric' => 'O valor do refrigerante esta inválido! Tente de R$ 0.00 a 99999999.99!',
+            'valor.between' => 'O valor do refrigerante deve ser entre R$ 0.00 a 99999999.99!',
+
+            'estoque.required' => 'Informe a quantidade em estoque do refrigerante!',
+            'estoque.numeric' => 'Quantidade para estoque inválida!',
+            'estoque.min' => 'A quantidade minima para o estoque é 0!'
         ];
     }
 }
