@@ -43,7 +43,7 @@ class RefrigerantesAtualizacoesRequest extends FormRequest
                 'required',
                 'regex:/^(?=.+)(?:[1-9]\d*|0)?(?:\.\d+)?$/',
                 'numeric',
-                'between:0.01,99999999.99'
+                'between:0.00,99999999.99'
             ],
             'estoque' => 'required|numeric|min:0'
         ];
