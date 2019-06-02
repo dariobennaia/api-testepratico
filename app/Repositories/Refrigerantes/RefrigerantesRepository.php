@@ -28,7 +28,7 @@ class RefrigerantesRepository extends Repository
         $model = $this->getModel();
 
         foreach ($busca as $i => $value) {
-            if (!in_array($i, $fill)) {
+            if (!in_array($i, $fill) || empty($value)) {
                 continue;
             }
             $model = $model->where($i, $value);
