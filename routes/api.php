@@ -13,11 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::group(['prefix' => 'refrigerantes'], function () {
+    Route::get(
+        '/tipos-refrigerantes',
+        'Refrigerantes\TiposRefrigerantesController@obterTodosOsRefrigerantes'
+    );
+    Route::get(
+        '/litragem-refrigerantes',
+        'Refrigerantes\LitragensRefrigerantesController@obterTodasAsLitragensRefrigerantes'
+    );
     Route::get('/', 'Refrigerantes\RefrigerantesController@obterTodosOsRefrigerantes');
     Route::get(
         '/paginacao/{total_paginas?}',

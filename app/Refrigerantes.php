@@ -25,7 +25,11 @@ class Refrigerantes extends Model
      */
     public function tipoRefrigerante()
     {
-        return $this->hasOne('App\TiposRefrigerantes', 'id_tipo_refrigerante');
+        return $this->hasOne(
+            'App\TiposRefrigerantes',
+            'id_tipo_refrigerante',
+            'id_tipo_refrigerante'
+        );
     }
 
     /**
@@ -33,6 +37,10 @@ class Refrigerantes extends Model
      */
     public function litragemRefrigerante()
     {
-        return $this->hasOne('App\LitragensRefrigerantes', 'id_litragem_refrigerante');
+        return $this->hasOne(
+            'App\LitragensRefrigerantes',
+            'id_litragem_refrigerante',
+            'id_litragem_refrigerante'
+        );
     }
 }
