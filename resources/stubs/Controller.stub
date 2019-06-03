@@ -1,0 +1,91 @@
+<?php
+
+namespace App\Http\Controllers{{nameSpaceClass}};
+
+use App\Http\Controllers\Controller;
+use App\Services\{{nameSpaceUseClass}}{{className}}Service;
+use Illuminate\Http\Request;
+use App\Http\Requests\{{nameSpaceUseClass}}{{className}}CreateRequest;
+use App\Http\Requests\{{nameSpaceUseClass}}{{className}}UpdateRequest;
+use App\Http\Requests\{{nameSpaceUseClass}}{{className}}StatusRequest;
+
+class {{className}}Controller extends Controller
+{
+    /**
+     * @var ${{attributeNameService}}Service
+     */
+    private ${{attributeNameService}}Service;
+
+    /**
+     * {{className}}Controller constructor.
+     * @param {{className}}Service ${{attributeNameService}}Service
+     */
+    public function __construct({{className}}Service ${{attributeNameService}}Service)
+    {
+        $this->{{attributeNameService}}Service = ${{attributeNameService}}Service;
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getAll{{className}}s()
+    {
+        return $this->returnResponseData($this->{{attributeNameService}}Service->getAll{{className}}s());
+    }
+
+    /**
+     * @param Request $request
+     * @param int $totalPage
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getAll{{className}}sPaginate(Request $request, int $totalPage = 10)
+    {
+        return $this->returnResponseData($this->{{attributeNameService}}Service->getAll{{className}}sPaginate($request->search, $totalPage));
+    }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function get{{className}}ById(int $id)
+    {
+        return $this->returnResponseData($this->{{attributeNameService}}Service->get{{className}}ById($id));
+    }
+
+    /**
+     * @param {{className}}CreateRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function create{{className}}({{className}}CreateRequest $request)
+    {
+        return $this->returnResponseData($this->{{attributeNameService}}Service->create{{className}}($request->toArray()));
+    }
+
+    /**
+     * @param {{className}}UpdateRequest $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update{{className}}({{className}}UpdateRequest $request, $id)
+    {
+        return $this->returnResponseData($this->{{attributeNameService}}Service->update{{className}}($id, $request->toArray()));
+    }
+
+    /**
+     * @param {{className}}StatusRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function enable{{className}}({{className}}StatusRequest $request)
+    {
+        return $this->returnResponseData($this->{{attributeNameService}}Service->enable{{className}}($request->id));
+    }
+
+    /**
+     * @param {{className}}StatusRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function disable{{className}}({{className}}StatusRequest $request)
+    {
+        return $this->returnResponseData($this->{{attributeNameService}}Service->disable{{className}}($request->id));
+    }
+}
