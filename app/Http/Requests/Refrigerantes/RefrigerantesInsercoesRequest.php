@@ -32,10 +32,11 @@ class RefrigerantesInsercoesRequest extends FormRequest
             'id_litragem_refrigerante' => 'required',
             'sabor' => [
                 'required',
+                'max:30',
                 "unique:refrigerantes,sabor,NULL,id_refrigerante,marca,{$marca},id_litragem_refrigerante,
                 {$idLitragemRefrigerante},id_tipo_refrigerante,{$idTipoRefrigerante},deleted_at,NULL"
             ],
-            'marca' => 'required',
+            'marca' => 'required|max:30',
             'valor' => [
                 'bail',
                 'required',
@@ -58,8 +59,10 @@ class RefrigerantesInsercoesRequest extends FormRequest
 
             'sabor.required' => 'Informe o sabor do refrigerante!',
             'sabor.unique' => 'Ops! parece que este refrigerante já esta cadastrado!',
+            'sabor.max' => 'O campo Sabor só é permitido até 30 caracteres!',
 
             'marca.required' => 'Informe a marca do refrigerante!',
+            'marca.max' => 'O campo marca só é permitido até 30 caracteres!',
 
             'valor.required' => 'Informe o valor unitário do refrigerante!',
             'valor.regex' => 'O valor do refrigerante esta inválido! Tente de R$ 0.00 a 99999999.99!',

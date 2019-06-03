@@ -8,6 +8,7 @@ que a Api funcione normalmente.
 - Nginx/1.14.0 >= ou Apache 2 >=
 - Docker 18.09 >=
 - Docker Compose 1.24.0 >=
+- Laravel 5.8 >=
 
 ### Banco dde dados
 - MySql 8.0.16 >= (Versão usada no desenvolvimento) 
