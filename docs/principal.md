@@ -1,7 +1,7 @@
-##Pre-requisitos para a instalação da Api
+## Pre-requisitos para a instalação da Api
 
-###Pré-requisito
+### Pré-requisito
 - [Ver Pré-requisitos](prerequisitos.md)
 
-###Instalação
+### Instalação
 - [Ver instalação](instalacao.md) 
