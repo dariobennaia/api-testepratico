@@ -8,3 +8,6 @@
 
 ### Bibliotecas
 - [Ver bibliotecas usadas](bibliotecas.md) 
+
+### Bonus
+- [Ver bonus](bonus.md) 
